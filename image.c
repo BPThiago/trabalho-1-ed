@@ -37,13 +37,13 @@ Image *load_from_ppm(const char *filename) {
     }
     char type[3];
     int r, c, max_value, val;
-    if (fscanf(f, "%s %d %d %d", type, &r, &c, &max_value) != 4) {
+    if (fscanf(f, "%s %u %u %u", type, &r, &c, &max_value) != 4) {
         printf("Invalid header");
         return NULL;
     }
 
     Image* img = create(r, c, type);
-    for (int i=0; fscanf(f, "%d", &val) != EOF; i++)
+    for (int i=0; fscanf(f, "%u", &val) != EOF; i++)
         img->matrix[i] = val;
     
     fclose(f);
@@ -64,10 +64,10 @@ void write_to_ppm(Image *image, const char *filename) {
         printf("Image file cannot be created.");
         return;
     }
-    fprintf(f, "%s\n%d %d\n%d\n", image->type, image->rows, image->cols, 255);  // TODO: É necessário mudar a assinatura
+    fprintf(f, "%s\n%u %u\n%u\n", image->type, image->rows, image->cols, 255);  // TODO: É necessário mudar a assinatura
     for (int i=0; i < image->rows; i++) {
         for (int j=0, mult = get_expansion_factor(image->type); j < mult*image->cols; j++)
-            fprintf(f, "%d ", image->matrix[i*image->cols*mult + j]);
+            fprintf(f, "%u ", image->matrix[i*image->cols*mult + j]);
         fprintf(f, "\n");
     }
     fclose(f);
