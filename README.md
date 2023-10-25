@@ -1,4 +1,4 @@
-# :briefcase: Trabalho 1 de Estrutura de Dados
+# :briefcase: Trabalho 1 de Estrutura de Dados - Grupo P
 
 ## :gear: Como executar?
 
