@@ -78,9 +78,9 @@ void write_to_ppm(Image *image, const char *filename) {
     assert(f != NULL);  // Use assertion to ensure that file opening was successful
 
     fprintf(f, "%s\n%u %u\n%u\n", image->type, image->width, image->height, 255);
-    for (int i=0; i < image->width; i++) {
-        for (int j=0, mult = _get_expansion_factor(image->type); j < mult*image->height; j++)
-            fprintf(f, "%u ", image->matrix[i*image->height*mult + j]);
+    for (int i=0, mult = _get_expansion_factor(image->type); i < image->height; i++) {
+        for (int j=0; j < image->width*mult; j++)
+            fprintf(f, "%u ", image->matrix[i*image->width*mult + j]);
         fprintf(f, "\n");
     }
     fclose(f);
