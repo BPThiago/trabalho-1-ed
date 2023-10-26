@@ -49,13 +49,13 @@ Image *load_from_ppm(const char *filename) {
         return NULL;
 
     char type[3];
-    int r, c, max_value, val;
+    int w, h, max_value, val;
 
     // If return of fscanf is different of 4, the header is invalid 
-    if (fscanf(f, "%2s %u %u %u", type, &r, &c, &max_value) != 4)
+    if (fscanf(f, "%2s %u %u %u", type, &w, &h, &max_value) != 4)
         return NULL;
 
-    Image* img = create(r, c, type);
+    Image* img = create(w, h, type);
     for (int i=0; fscanf(f, "%u", &val) != EOF; i++)
         img->matrix[i] = val;
     
