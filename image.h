@@ -29,7 +29,6 @@ Image *load_from_ppm(const char *filename);
  */
 int get_image_width(Image *image);
 
-
 /**
  * Gets the height of an image.
  * 
